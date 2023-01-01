@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
@@ -11,14 +11,26 @@ const Login = (props) => {
   const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
 
+
+  useEffect(()=>{
+    setFormIsValid(
+      enteredEmail.includes('@') && enteredPassword.trim().length > 6
+
+    );
+
+  },[enteredEmail,enteredPassword])
+
+  // here first time the function inside the useEffect will execute, but after that if only the dependencies(enteredEmail, enteredPassword)
+  // either of both of them changes, then the fuction will execute once again
+
   const emailChangeHandler = (event) => {
     setEnteredEmail(event.target.value);
     console.log("enteredmail = "+enteredEmail);
 
-    setFormIsValid(
-      event.target.value.includes('@') && enteredPassword.trim().length > 6
+    // setFormIsValid(
+    //   event.target.value.includes('@') && enteredPassword.trim().length > 6
 
-    );
+    // );
 
    
   };
@@ -26,9 +38,9 @@ const Login = (props) => {
   const passwordChangeHandler = (event) => {
     setEnteredPassword(event.target.value);
 
-    setFormIsValid(
-      event.target.value.trim().length > 6 && enteredEmail.includes('@')
-    );
+    // setFormIsValid(
+    //   event.target.value.trim().length > 6 && enteredEmail.includes('@')
+    // );
   };
 
   const validateEmailHandler = () => {
