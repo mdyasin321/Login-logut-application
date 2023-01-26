@@ -5,6 +5,7 @@ import classes from './Login.module.css';
 import Button from '../UI/Button/Button';
 
 const emailReducer=(prevState,action)=>{
+  //here the prevState variable is the snapshot of previous latest state and it is not the snapshot of previous rendered page state 
   if(action.type==='UserInput'){
     return {value:action.val , isValid:action.val.includes('@')}
   }
@@ -93,9 +94,9 @@ const Login = (props) => {
 
                        //OR(Using useReducer hook)
 
-   setFormIsValid(
-       passwordState.isValid && emailState.isValid
-     );                   
+  //  setFormIsValid(
+  //      passwordState.isValid && emailState.isValid
+  //    );                   
   };
 
   const validateEmailHandler = () => {
